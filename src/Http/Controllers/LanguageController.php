@@ -20,7 +20,7 @@ class LanguageController extends Controller
     {
         $languages = $this->translation->allLanguages();
 
-        return inertia('Panel/Languages/index', compact('languages'));
+        return inertia('Panel/Languages/Index', compact('languages'));
     }
 
     public function create()
