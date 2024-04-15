@@ -20,7 +20,7 @@ class LanguageTranslationController extends Controller
 
     public function index(Request $request, $language)
     {
-        // dd($this->translation->getSingleTranslationsFor('en'));
+
         if ($request->has('language') && $request->get('language') !== $language) {
             return redirect()
                 ->route('languages.translations.index', ['language' => $request->get('language'), 'group' => $request->get('group'), 'filter' => $request->get('filter')]);
@@ -43,12 +43,13 @@ class LanguageTranslationController extends Controller
             }
         }
 
-        return view('translation::languages.translations.index', compact('language', 'languages', 'groups', 'translations'));
+        return inertia('Panel/Languages/Transactions/Index', compact('language', 'languages', 'groups', 'translations'));
     }
 
     public function create(Request $request, $language)
     {
-        return view('translation::languages.translations.create', compact('language'));
+
+        return inertia('Panel/Languages/Transactions/Create', compact('language'));
     }
 
     public function store(TranslationRequest $request, $language)
