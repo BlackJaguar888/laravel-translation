@@ -2,10 +2,14 @@
 
 namespace JoeDixon\Translation\Http\Controllers;
 
+use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Gate;
 use JoeDixon\Translation\Drivers\Translation;
+use JoeDixon\Translation\Http\Requests\LanguageDestroyRequest;
 use JoeDixon\Translation\Http\Requests\LanguageRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class LanguageController extends Controller
 {
@@ -35,5 +39,13 @@ class LanguageController extends Controller
         return redirect()
             ->route('languages.index')
             ->with('success', __('translation::translation.language_added'));
+    }
+
+    public function destroy(LanguageDestroyRequest $request)
+    {
+
+        $this->translation->deleteDirectory($request->validated()['language']);
+
+        return redirect()->back();
     }
 }
