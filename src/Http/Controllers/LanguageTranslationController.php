@@ -32,7 +32,7 @@ class LanguageController extends Controller
     public function store(LanguageRequest $request)
     {
         $this->translation->addLanguage($request->validated()['locale'], $request->validated()['name']);
-
+dd($request);
         return redirect()
             ->route('languages.index')
             ->with('success', __('translation::translation.language_added'));
